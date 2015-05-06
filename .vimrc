@@ -54,9 +54,10 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 " set omnifunc=syntaxcomplete#Complete
 
 set colorcolumn=79
-hi ColorColumn ctermbg=237
+hi ColorColumn ctermbg=grey
+hi Search ctermfg=black ctermbg=grey
 set paste                      " so that pasted text won't get reformatted
-au InsertLeave * set nopaste   " disable paste mode when leaving insert mode
+" au InsertLeave * set nopaste   " disable paste mode when leaving insert mode
 set backspace=indent,eol,start " make backspace key work the way it should
 
 " JSON syntax with javascript
