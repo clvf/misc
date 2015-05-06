@@ -23,7 +23,7 @@ set nocompatible  " use vim defaults
 set scrolloff=3   " keep 3 lines when scrolling
 set showcmd       " display incomplete commands
 set nobackup      " do not keep a backup file
-set ruler         " show the current row and column
+"set ruler         " show the current row and column
 set textwidth=79  " lines longer than 79 columns will be broken
 set shiftwidth=4  " operation >> indents 4 columns; << unindents 4 columns
 set tabstop=4     " a hard TAB displays as 4 columns
@@ -38,7 +38,14 @@ set ignorecase    " ignore case when searching
 set smartcase     " no ignorecase if Uppercase char present
 set foldmethod=indent
 set foldlevel=99
-set statusline=%F%m%r%h%w\ [%{&ff}]\ [%Y]\ (%03l,%04v)[%p%%]\ %L\ LINES
+set statusline=%f                " path to the file
+set statusline+=\ [%{&ff}]       " eol type
+set statusline+=\ [%Y]           " file type
+set stausline+=\ (l:%3l,\ c:%3v) " (line, column)
+set statusline+=\ [%p%%]         " % of the cursor in the file
+set statusline+=\ %L\ LINES      " total number of lines
+set laststatus=2  " display the statusline permanently
+set tabpagemax=100
 
 syntax on         " turn syntax highlighting on by default
 filetype on       " detect type of file
