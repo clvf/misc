@@ -5,6 +5,9 @@ colorscheme delek
 
 :let maplocalleader = "\\"
 
+" File explorer
+let g:netrw_liststyle=3
+nnoremap <C-e> <esc>:Texplore<CR>
 
 " moving between tabs
 nnoremap <C-l> <esc>:tabnext<CR>
@@ -54,7 +57,7 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 " set omnifunc=syntaxcomplete#Complete
 
 set colorcolumn=79
-hi ColorColumn ctermbg=grey
+hi ColorColumn ctermbg=4
 hi Search ctermfg=black ctermbg=grey
 set paste                      " so that pasted text won't get reformatted
 " au InsertLeave * set nopaste   " disable paste mode when leaving insert mode
