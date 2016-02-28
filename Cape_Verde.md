@@ -68,7 +68,8 @@ Sao Filipe városa a "Sobrado" építészetű házaival valamint Chá das Caldei
 az érdekes.
 
 
-[CarboContact](http://www.cabocontact.com)
-[Lonely Planet](http://www.lonelyplanet.com/cape-verde)
-[Triposo](https://www.triposo.com/loc/Cape_Verde)
+[CarboContact](http://www.cabocontact.com)  
+[Lonely Planet](http://www.lonelyplanet.com/cape-verde)  
+[Triposo](https://www.triposo.com/loc/Cape_Verde)  
+[Német izébizé](http://bela-vista.net/index-d.aspx)  
 
