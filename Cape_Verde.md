@@ -67,6 +67,12 @@ kuka. A szigetet szőlő és kávéültetvények szegélyezik.
 Sao Filipe városa a "Sobrado" építészetű házaival valamint Chá das Caldeiras
 az érdekes.
 
+# Terv
+márc 12 - 14 Santiago - Praia
+márc 15 - 17 Sao Antao, természetjárás
+márc 18 - 21 Sao Vicente, Mindelo, quad túra stb.
+márc 21 - 23 Fogo, Vulkántúra
+márc 24 - 25 Praia, hazaút
 
 [CarboContact](http://www.cabocontact.com)  
 [Lonely Planet](http://www.lonelyplanet.com/cape-verde)  
