@@ -9,7 +9,7 @@ Látnivalók:
   * az igazságügyi palota? (palace of justice),
   * az etnográfiai múzeum
   * a miniszterelnöki palota
-  * parlament az
+  * parlament
   * éttermek, bárok
 * A régi Bateira erőd. 
 * Várzea negyed:
@@ -17,19 +17,10 @@ Látnivalók:
   * Ruhákat, helyi kézműves árúkat, helyi ételeket, afrikai háztartási
     eszközöket lehet vásárolni
 
-## Bay of Tarrafal
+## Szigeten érdekes még:
 
-Természetjárás Assomada város körül
-
-# Fogo sziget
-
-A Pico de Fogo hegyre Chã das Caldeiras-ból visz fel a legszebb út (kb. 6 óra,
-1000 méteres szintemelkedés), a kb. 5 ajánlottból. A túracipő általában utána
-kuka. A szigetet szőlő és kávéültetvények szegélyezik.
-
-## Sao Filipe:
-
-"Sobrado" építészetű házak.
+* Természetjárás Assomada város körül
+* Bay of Tarrafal: napozás, strandolás
 
 # Sao Vicente sziget
 
@@ -66,6 +57,15 @@ részletes turista térképet (hiking map) kapni.
 
 Látnivalók:
 * Natural park of Moroços
+
+# Fogo sziget
+
+A Pico de Fogo hegyre Chá das Caldeiras-ból visz fel a legszebb út (kb. 6 óra,
+1000 méteres szintemelkedés), a kb. 5 ajánlottból. A túracipő általában utána
+kuka. A szigetet szőlő és kávéültetvények szegélyezik.
+
+Sao Filipe városa a "Sobrado" építészetű házaival valamint Chá das Caldeiras
+az érdekes.
 
 
 [CarboContact](http://www.cabocontact.com)
