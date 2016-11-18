@@ -1,6 +1,7 @@
 set t_Co=256
 nnoremap <F9> :!clear && %:p<CR>
 inoremap <F9> <C-o>:update<Bar>execute '!clear && %:p'<CR>
+nnoremap <F10> :!clear && %:p 2>&1<Bar>less<CR>
 colorscheme delek
 
 :let maplocalleader = "\\"
@@ -76,23 +77,22 @@ nnoremap <silent> <F8> :TlistToggle<CR>
 
 set t_RV=               " http://bugs.debian.org/608242, http://groups.google.com/group/vim_dev/browse_thread/thread/9770ea844cec3282
 
-function! ScanMsverEntries()
+function! ScanEntries()
 python <<EOF
 import vim, re
-class MsverScanner(object):
-        _RE_MSVER = re.compile(r"""(^import.*ms\.version.*$|^ms\.version.*$)""",
-                               re.VERBOSE)
+class Scanner(object):
+        _RE = re.compile(r"""(^import.*version.*$|^version.*$)""", re.VERBOSE)
 
         def get_lines(self, buf):
-                return (line for line in buf if self._RE_MSVER.match(line))
+                return (line for line in buf if self._RE.match(line))
 
-scanner = MsverScanner()
+scanner = Scanner()
 i = 0
 for line in scanner.get_lines(vim.current.buffer[:]):
         vim.command("python " + line)
         i += 1
 
-print "executed %d msversion cmds" % i
+print "executed %d version cmds" % i
 EOF
 endfunction
-nnoremap <F10> :call ScanMsverEntries()<CR>
+nnoremap <F11> :call ScanEntries()<CR>

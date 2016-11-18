@@ -1,0 +1,29 @@
+[user]
+	name = ...
+	email = ...
+[core]
+	editor = vim
+[color]
+	ui = auto
+[alias]
+	chp = cherry-pick -x
+	co = checkout
+	d = diff -w --color-words
+	dnew = log --color-words --patch-with-stat ORIG_HEAD..
+	ds = diff --staged -w --color-words
+	fa = !git remote | xargs -P15 -n1 git fetch -p
+	fix = commit --amend -C HEAD
+	lg = log --oneline --graph --all --decorate --color --abbrev-commit
+	po = pull origin
+	sed = !git grep -ilz . ${GIT_PREFIX}. | xargs -0 sed -i
+	sh = show -w --color-words --patch-with-stat
+	st = status -sb
+	undo = !git status --porcelain | grep -q -v \"^??\" && git stash save && git stash drop
+[diff]
+	mnemonicprefix = true
+[log]
+	decorate = short
+[merge]
+	conflictstyle = diff
+[rebase]
+	autosquash = true
