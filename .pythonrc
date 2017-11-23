@@ -1,0 +1,12 @@
+#try:
+#    import readline
+#except ImportError:
+#    pass
+#else:
+#    import rlcompleter
+#    readline.parse_and_bind("tab: complete")
+#    readline.parse_and_bind("set editing-mode vi")
+
+import pyrepl
+import fancycompleter
+fancycompleter.interact()

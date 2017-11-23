@@ -1,13 +1,32 @@
-set t_Co=256
+set nocompatible " use vim defaults
+
+execute pathogen#infect()
+execute pathogen#helptags()
+
+syntax on         " turn syntax highlighting on by default
+filetype on       " detect type of file
+filetype plugin indent on " load indent file for specific file type
+
+" COLOR
+colorscheme solarized
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+set colorcolumn=79
+" hi ColorColumn ctermbg=4
+
+
 nnoremap <F9> :!clear && %:p<CR>
 inoremap <F9> <C-o>:update<Bar>execute '!clear && %:p'<CR>
-nnoremap <F10> :!clear && %:p 2>&1<Bar>less<CR>
-colorscheme delek
+nnoremap <F10> :!clear && %:p 2>&1<BAR>less<CR>
 
 :let maplocalleader = "\\"
 
 " File explorer
 let g:netrw_liststyle=3
+let g:netrw_keepdir=0
 nnoremap <C-e> <esc>:Texplore<CR>
 
 " moving between tabs
@@ -21,70 +40,76 @@ vnoremap > >gv
 " clear search highlights
 noremap <silent><localleader>/ :nohls<CR>
 
-set number
-set list
-set nocompatible  " use vim defaults
-set scrolloff=3   " keep 3 lines when scrolling
-set showcmd       " display incomplete commands
-set nobackup      " do not keep a backup file
-"set ruler         " show the current row and column
-set textwidth=79  " lines longer than 79 columns will be broken
-set shiftwidth=4  " operation >> indents 4 columns; << unindents 4 columns
-set tabstop=4     " a hard TAB displays as 4 columns
-set expandtab     " insert spaces when hitting TABs
-set softtabstop=4 " insert/delete 4 spaces when hitting a TAB/BACKSPACE
-set shiftround    " round indent to multiple of 'shiftwidth'
 set autoindent    " align the new line indent with the previous line
-set hlsearch      " highlight searches
-set incsearch     " do incremental searching
-set showmatch     " jump to matches when entering regexp
-set ignorecase    " ignore case when searching
-set smartcase     " no ignorecase if Uppercase char present
-set foldmethod=indent
+set backspace=indent,eol,start whichwrap+=<,>,[,] " make backspace work the way it should
+set confirm       " raise a dialogue asking if you wish to save changed files
+set expandtab     " insert spaces when hitting TABs
 set foldlevel=99
-set statusline=%f                " path to the file
-set statusline+=\ [%{&ff}]       " eol type
-set statusline+=\ [%Y]           " file type
-set statusline+=\ (l:%3l,\ c:%3v) " (line, column)
-set statusline+=\ [%p%%]         " % of the cursor in the file
-set statusline+=\ %L\ LINES      " total number of lines
+set foldmethod=indent
+set hlsearch      " highlight searches
+set ignorecase    " ignore case when searching
+set incsearch     " do incremental searching
 set laststatus=2  " display the statusline permanently
+set list
+set nobackup      " do not keep a backup file
+set nostartofline " stop certain movements from always going to the first char of line
+set number
+set paste         " so that pasted text won't get reformatted
+set scrolloff=3   " keep 3 lines when scrolling
+set shiftround    " round indent to multiple of 'shiftwidth'
+set shiftwidth=4  " operation >> indents 4 columns; << unindents 4 columns
+set showcmd       " display incomplete commands
+set showmatch     " jump to matches when entering regexp
+set smartcase     " no ignorecase if Uppercase char present
+set softtabstop=4 " insert/delete 4 spaces when hitting a TAB/BACKSPACE
 set tabpagemax=100
+set tabstop=4     " a hard TAB displays as 4 columns
+set textwidth=79  " lines longer than 79 columns will be broken
+set wildmenu      " better command-line completion
+set wildmode=longest,list,full " complete to longest then list then full
 
-syntax on         " turn syntax highlighting on by default
-filetype on       " detect type of file
-filetype indent on " load indent file for specific file type
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-" set omnifunc=syntaxcomplete#Complete
-
-set colorcolumn=79
-hi ColorColumn ctermbg=4
-hi Search ctermfg=black ctermbg=grey
-set paste                      " so that pasted text won't get reformatted
-" au InsertLeave * set nopaste   " disable paste mode when leaving insert mode
-set backspace=indent,eol,start " make backspace key work the way it should
+" set statusline=%f                " path to the file
+" set statusline+=\ [%{&ff}]       " eol type
+" set statusline+=\ [%Y]           " file type
+" set statusline+=\ (l:%3l,\ c:%3v) " (line, column)
+" set statusline+=\ [%p%%]         " % of the cursor in the file
+" set statusline+=\ %L\ LINES      " total number of lines
 
 " JSON syntax with javascript
 autocmd BufNewFile,BufRead *.json set ft=javascript
 
-" :help taglist
-" Taglist plugin: no console window resize
-let Tlist_Inc_Winwidth = 0
-" taglist window gets the focus automatically
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Close_On_Select = 1
-nnoremap <silent> <F8> :TlistToggle<CR>
+" Tagbar
+" :help tagbar
+nnoremap <silent> <F8> :TagbarToggle<CR>
 
-set t_RV=               " http://bugs.debian.org/608242, http://groups.google.com/group/vim_dev/browse_thread/thread/9770ea844cec3282
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" YouCompleteMe
+let g:ycm_config_extra_conf = 0
+let $PATH = "/usr/bin/python3:" . $PATH
+" let $PYTHONPATH = "..."
+
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline_theme='molokai'
 
 function! ScanEntries()
 python <<EOF
 import vim, re
 class Scanner(object):
-        _RE = re.compile(r"""(^import.*version.*$|^version.*$)""", re.VERBOSE)
+        _RE_VER = re.compile(r"""(^import.*$)""", re.VERBOSE)
 
         def get_lines(self, buf):
-                return (line for line in buf if self._RE.match(line))
+                return (line for line in buf if self._RE_VER.match(line))
 
 scanner = Scanner()
 i = 0

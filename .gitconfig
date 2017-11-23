@@ -1,29 +1,35 @@
 [user]
-	name = ...
-	email = ...
+    name = ...
+    email = ...
 [core]
-	editor = vim
+    editor = vim
 [color]
-	ui = auto
+    ui = auto
 [alias]
-	chp = cherry-pick -x
-	co = checkout
-	d = diff -w --color-words
-	dnew = log --color-words --patch-with-stat ORIG_HEAD..
-	ds = diff --staged -w --color-words
-	fa = !git remote | xargs -P15 -n1 git fetch -p
-	fix = commit --amend -C HEAD
-	lg = log --oneline --graph --all --decorate --color --abbrev-commit
-	po = pull origin
-	sed = !git grep -ilz . ${GIT_PREFIX}. | xargs -0 sed -i
-	sh = show -w --color-words --patch-with-stat
-	st = status -sb
-	undo = !git status --porcelain | grep -q -v \"^??\" && git stash save && git stash drop
+    br = "!f() {rv=$?; br=$(git rev-parse --abbrev-ref HEAD); echo \"($br) [$rv]\";}; f"
+    chp = cherry-pick -x
+    co = checkout
+    d = diff -w --color-words
+    dnew = log --color-words --patch-with-stat ORIG_HEAD..
+    ds = diff --staged -w --color-words
+    fa = !git remote | xargs -P15 -n1 git fetch -p
+    fix = commit --amend -C HEAD
+    l = log --graph --pretty='tformat:%C(yellow)%h %C(cyan)%aN%C(green)%d %C(reset)%s'
+    lg = log --oneline --graph --all --decorate --color --abbrev-commit
+    logb = log --stat --right-only master...
+    logd = log -w --color-words --patch-with-stat
+    lognew = log --stat ORIG_HEAD..
+    po = pull origin
+    pr = "!f() {git fetch origin refs/pull-requests/$1/from:pr/$1; }; f"
+    sed = !git grep -ilz . ${GIT_PREFIX}. | xargs -0 sed -i
+    sh = show -w --color-words --patch-with-stat
+    st = status -sb
+    undo = !git status --porcelain | grep -q -v \"^??\" && git stash save && git stash drop
 [diff]
-	mnemonicprefix = true
+    mnemonicprefix = true
 [log]
-	decorate = short
+    decorate = short
 [merge]
-	conflictstyle = diff
+    conflictstyle = diff3
 [rebase]
-	autosquash = true
+    autosquash = true
