@@ -3,6 +3,9 @@ set nocompatible " use vim defaults
 execute pathogen#infect()
 execute pathogen#helptags()
 
+""""""""""""""""
+" SETTINGS
+""""""""""""""""
 syntax on         " turn syntax highlighting on by default
 filetype on       " detect type of file
 filetype plugin indent on " load indent file for specific file type
@@ -18,20 +21,21 @@ set colorcolumn=79
 " hi ColorColumn ctermbg=4
 
 
-nnoremap <F9> :!clear && %:p<CR>
-inoremap <F9> <C-o>:update<Bar>execute '!clear && %:p'<CR>
-nnoremap <F10> :!clear && %:p 2>&1<BAR>less<CR>
+nnoremap <F9> :!clear; %:p<CR>
+inoremap <F9> <C-o>:update<Bar>execute '!clear; %:p'<CR>
+nnoremap <F10> :!clear; %:p 2>&1<BAR>less<CR>
+nnoremap <F12> :!clear; go run %<CR>
 
 :let maplocalleader = "\\"
-
-" File explorer
-let g:netrw_liststyle=3
-let g:netrw_keepdir=0
-nnoremap <C-e> <esc>:Texplore<CR>
 
 " moving between tabs
 nnoremap <C-l> <esc>:tabnext<CR>
 nnoremap <C-h> <esc>:tabprevious<CR>
+
+" File explorer
+"let g:netrw_liststyle=3
+"let g:netrw_keepdir=0
+"nnoremap <C-e> <esc>:Texplore<CR>
 
 " reselect visual block after indent/outdent
 vnoremap < <gv
@@ -46,6 +50,7 @@ set confirm       " raise a dialogue asking if you wish to save changed files
 set expandtab     " insert spaces when hitting TABs
 set foldlevel=99
 set foldmethod=indent
+set formatoptions=tcrql1  " see :help fo-table
 set hlsearch      " highlight searches
 set ignorecase    " ignore case when searching
 set incsearch     " do incremental searching
@@ -54,7 +59,6 @@ set list
 set nobackup      " do not keep a backup file
 set nostartofline " stop certain movements from always going to the first char of line
 set number
-set paste         " so that pasted text won't get reformatted
 set scrolloff=3   " keep 3 lines when scrolling
 set shiftround    " round indent to multiple of 'shiftwidth'
 set shiftwidth=4  " operation >> indents 4 columns; << unindents 4 columns
@@ -68,45 +72,59 @@ set textwidth=79  " lines longer than 79 columns will be broken
 set wildmenu      " better command-line completion
 set wildmode=longest,list,full " complete to longest then list then full
 
-" set statusline=%f                " path to the file
-" set statusline+=\ [%{&ff}]       " eol type
-" set statusline+=\ [%Y]           " file type
-" set statusline+=\ (l:%3l,\ c:%3v) " (line, column)
-" set statusline+=\ [%p%%]         " % of the cursor in the file
-" set statusline+=\ %L\ LINES      " total number of lines
-
 " JSON syntax with javascript
 autocmd BufNewFile,BufRead *.json set ft=javascript
 
+"""""""""""""""
+" PLUGINS
+"""""""""""""""
+
+" YouCompleteMe
+let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
+" File explorer
+let g:netrw_liststyle=3
+let g:netrw_keepdir=0
+nnoremap <C-e> <esc>:Texplore<CR>
+
 " Tagbar
-" :help tagbar
 nnoremap <silent> <F8> :TagbarToggle<CR>
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
-" YouCompleteMe
-let g:ycm_config_extra_conf = 0
-let $PATH = "/usr/bin/python3:" . $PATH
-" let $PYTHONPATH = "..."
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
-let g:airline_theme='molokai'
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
 
-function! ScanEntries()
+" Yapf python code reformatting
+map <C-Y> :call yapf#YAPF()<CR>
+imap <C-Y> <C-O>:call yapf#YAPF()<CR>
+
+""""""""""""""""""
+" FUNCTIONS
+""""""""""""""""""
+
+function! Pymport()
 python <<EOF
-import vim, re
+import os
+import re
+import sys
+import vim
+
 class Scanner(object):
-        _RE_VER = re.compile(r"""(^import.*$)""", re.VERBOSE)
+        _RE_VER = re.compile(r'(^import.*$)')
 
         def get_lines(self, buf):
                 return (line for line in buf if self._RE_VER.match(line))
@@ -120,4 +138,6 @@ for line in scanner.get_lines(vim.current.buffer[:]):
 print "executed %d version cmds" % i
 EOF
 endfunction
-nnoremap <F11> :call ScanEntries()<CR>
+
+
+nnoremap <F11> :call Pymport()<CR>
