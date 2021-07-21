@@ -11,6 +11,7 @@ filetype on       " detect type of file
 filetype plugin indent on " load indent file for specific file type
 
 " COLOR
+let g:solarized_termcolors=256
 colorscheme solarized
 if has('gui_running')
     set background=light
@@ -109,8 +110,8 @@ let g:airline_theme='solarized'
 let g:airline_solarized_bg='dark'
 
 " Yapf python code reformatting
-map <C-Y> :call yapf#YAPF()<CR>
-imap <C-Y> <C-O>:call yapf#YAPF()<CR>
+" map <C-Y> :call yapf#YAPF()<CR>
+" imap <C-Y> <C-O>:call yapf#YAPF()<CR>
 
 """"""""""""""""""
 " FUNCTIONS
